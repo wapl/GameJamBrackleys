@@ -49,7 +49,7 @@ public class Door : MonoBehaviour
                 reward = "Musket";
                 break;
             case 4:
-                reward = "One Handed Swrod";
+                reward = "One Handed Sword";
                 break;
             case 5:
                 reward = "Club";
@@ -130,6 +130,27 @@ public class Door : MonoBehaviour
                 i = UnityEngine.Random.Range(0, rewardsSounds.Length);
                 audioSource.clip = rewardsSounds[i];
                 audioSource.Play();
+                switch (reward)
+                {
+                    case "Dog Treat":
+                        player.GetComponent<Player>().addSniffer();
+                        break;
+                    case "Night Vision":
+                        player.GetComponent<Player>().addNightVision();
+                        break;
+                    case "Bow":
+                        player.GetComponent<Player>().equppedWeapon = "Bow";
+                        break;
+                    case "Musket":
+                        player.GetComponent<Player>().equppedWeapon = "Musket";
+                        break;
+                    case "One Handed Sword":
+                        player.GetComponent<Player>().equppedWeapon = "One Handed Sword";
+                        break;
+                    case "Club":
+                        player.GetComponent<Player>().equppedWeapon = "Club";
+                        break;
+                }
 
                 transform.Find("Prize").gameObject.SetActive(true);
 
@@ -160,6 +181,7 @@ public class Door : MonoBehaviour
                 transform.Find("Trap").gameObject.SetActive(true);
                 audioSource.clip = trapReveal;
                 audioSource.Play();
+                player.GetComponent<Player>().playerDamaged(10);
             }
         }
         
