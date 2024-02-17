@@ -10,17 +10,22 @@ public class Door : MonoBehaviour
     public int doorId;
     public string behindTheDoor = "";
     public  Boolean revealed = false;
+    
     public AudioSource audioSource;
     public AudioClip[] doorCroaks;
     public AudioClip[] rewardsSounds;
+    public AudioClip[] enemiesSounds;
     public AudioClip ghoulReveal;
     public AudioClip trapReveal;
+    
     public  GameObject player;
 
     public Sprite[] rewards;
+    public Sprite[] Enemies;
 
     private Boolean selected;
-    private string reward; 
+    private string reward;
+    public  string enemy;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +53,21 @@ public class Door : MonoBehaviour
                 break;
             case 5:
                 reward = "Club";
+                break;
+
+        }
+        i = UnityEngine.Random.Range(0, Enemies.Length);
+        transform.Find("Enemy").GetComponent<SpriteRenderer>().sprite = Enemies[i];
+        switch (i)
+        {
+            case 0:
+                enemy = "Barbarian";
+                break;
+            case 1:
+                enemy = "Wolf";
+                break;
+            case 2:
+                enemy = "Zombie";
                 break;
 
         }
@@ -110,9 +130,36 @@ public class Door : MonoBehaviour
                 i = UnityEngine.Random.Range(0, rewardsSounds.Length);
                 audioSource.clip = rewardsSounds[i];
                 audioSource.Play();
+
                 transform.Find("Prize").gameObject.SetActive(true);
 
                 player.GetComponent<Player>().addScore(10);
+            }
+            else if(behindTheDoor=="enemy")
+            {
+                switch (enemy)
+                {
+                    case "Barbarian":
+                        audioSource.clip = enemiesSounds[0];
+                        audioSource.Play();
+                        break;
+                    case "Wolf":
+                        audioSource.clip = enemiesSounds[1];
+                        audioSource.Play();
+                        break;
+                    case "Zombie":
+                        audioSource.clip = enemiesSounds[2];
+                        audioSource.Play();
+                        break;
+                }
+                transform.Find("Enemy").gameObject.SetActive(true);
+
+            }
+            else
+            {
+                transform.Find("Trap").gameObject.SetActive(true);
+                audioSource.clip = trapReveal;
+                audioSource.Play();
             }
         }
         
@@ -122,7 +169,6 @@ public class Door : MonoBehaviour
     {
        
         GetComponent<Animator>().SetBool("DoorOpen", true);
-
         selected = true;
     }
 

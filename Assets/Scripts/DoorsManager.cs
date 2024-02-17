@@ -75,7 +75,7 @@ public class DoorsManager : MonoBehaviour
     
     
     //This is fired after a player a pick the door and the dealer reveals what is behind a door. 
-    public void Reveal(int doorId)
+    public void Reveal(int chosenDoor)
     {
         allowClick = false;
         
@@ -87,7 +87,7 @@ public class DoorsManager : MonoBehaviour
 
             foreach (GameObject door in doorPrefab)
             {
-                if (door.GetComponent<Door>().doorId != doorId && door.GetComponent<Door>().behindTheDoor != "prize")
+                if (door.GetComponent<Door>().doorId != chosenDoor && door.GetComponent<Door>().behindTheDoor != "prize")
                 {
                     tempDoors.Add(door);
                 }
@@ -108,22 +108,32 @@ public class DoorsManager : MonoBehaviour
             {
                 tempDoors[i].GetComponent<Animator>().SetBool("DoorReveal", true);
             }
-            
-            
-           
-            tempDoors[i].GetComponent<Door>().revealed = true;
+            else if(tempDoors[i].GetComponent<Door>().behindTheDoor == "traps")
+            {
+                tempDoors[i].GetComponent<Animator>().SetBool("DoorReveal", true);
+            }
+
+
+                    tempDoors[i].GetComponent<Door>().revealed = true;
 
             dialogPanel.GetComponent<DialogManager>().NextDialog();
             clicks++;
         }
         else if(playerUsedSnif)
         {
-            StartCoroutine(DogSniffReveal(doorId));
+            if(player.GetComponent<Player>().sniifferCharges>0)
+            {
+                StartCoroutine(DogSniffReveal(chosenDoor));
+            }
+            
         }
         else
         {
-            Debug.Log("DoorId" + doorId);
-            doorPrefab[doorId].GetComponent<Animator>().SetBool("DoorTrap", true);
+            if(player.GetComponent<Player>().nightVisionCharges>0)
+            {
+                doorPrefab[chosenDoor].GetComponent<Animator>().SetBool("DoorTrap", true);
+            }
+            
         }
 
        

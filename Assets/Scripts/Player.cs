@@ -5,8 +5,8 @@ using TMPro;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float health;
-    [SerializeField] private int sniifferCharges = 1;
-    [SerializeField] private int nightVisionCharges = 1;
+    public  int sniifferCharges = 1;
+    public  int nightVisionCharges = 1;
     [SerializeField] TextMeshProUGUI textScore;
 
     [SerializeField]private  int score;
