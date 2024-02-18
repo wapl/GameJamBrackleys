@@ -16,8 +16,14 @@ public class Player : MonoBehaviour
     [SerializeField]private  int score;
     
     public string equppedWeapon = "";
-    public Slider HealthBar; 
+    public Slider HealthBar;
 
+    public GameObject EndScreen;
+    public TextMeshProUGUI SnifferUI;
+    public TextMeshProUGUI NightVisionUi;
+
+    public GameObject WeaponIconUi;
+    public Sprite[] weapons;
     public DoorsManager doorsManager;
     // Start is called before the first frame update
     void Start()
@@ -33,23 +39,32 @@ public class Player : MonoBehaviour
 
     public void Sniff()
     {
-        sniifferCharges--;
         
         doorsManager.playerUsedSnif = true;
     }
 
     public void useNightVision()
     {
-        sniifferCharges--;
+       
 
         doorsManager.playerUsedNightVision= true;
     }
+    public void removeSniff()
+    {
+        sniifferCharges--;
+        SnifferUI.text = sniifferCharges.ToString();
+    }
 
+    public void removeNight()
+    {
+        nightVisionCharges--;
+        NightVisionUi.text = nightVisionCharges.ToString();
+    }
     public void addScore(int i)
     {
        
         this.score = score + i;
-        Debug.Log("Score"+this.score);
+        
         string scoreStr = this.score.ToString();
         if(textScore!=null)
         {
@@ -65,11 +80,13 @@ public class Player : MonoBehaviour
     public void addSniffer()
     {
         sniifferCharges++;
+        SnifferUI.text = sniifferCharges.ToString();
     }
 
     public void addNightVision()
     {
         nightVisionCharges++;
+        NightVisionUi.text = nightVisionCharges.ToString();
 
     }
     public void playerDamaged(float damage)
@@ -78,6 +95,33 @@ public class Player : MonoBehaviour
         //audioSource.clip = playerHurt;
         //audioSource.Play();
         HealthBar.value = health / 100;
+        if (health <= 0)
+        {
+            EndScreen.SetActive(true);
+        }
+    }
+
+    public void setWeapon(string equipment)
+    {
+        equppedWeapon = equipment;
+        switch (equppedWeapon)
+        {
+            case "Bow":
+                WeaponIconUi.GetComponent<SpriteRenderer>().sprite = weapons[0];
+                break;
+            case "Musket":
+                WeaponIconUi.GetComponent<SpriteRenderer>().sprite = weapons[1];
+                break;
+            case "One Handed Sword":
+                WeaponIconUi.GetComponent<SpriteRenderer>().sprite = weapons[2];
+                break;
+            case "Club":
+                WeaponIconUi.GetComponent<SpriteRenderer>().sprite = weapons[3];
+                break;
+            case "":
+                WeaponIconUi.GetComponent<SpriteRenderer>().sprite = null;
+                break;
+        }
     }
 
 }

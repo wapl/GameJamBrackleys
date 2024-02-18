@@ -61,6 +61,37 @@ public class DoorsManager : MonoBehaviour
     {
         
     }
+    public void ResetDoors()
+    {
+        Boolean prizeGenerated = false;
+        clicks = 0;
+        UnityEngine.Random.InitState((int)System.DateTime.Now.Ticks);
+        behindDoorScene[0] = "prize";
+        behindDoorScene[1] = "traps";
+        behindDoorScene[2] = "enemy";
+        playerUsedSnif = false;
+        playerUsedNightVision = false;
+        clicks = 0;
+        dialogPanel.GetComponent<DialogManager>().setDialog(0);
+        while (!prizeGenerated)
+        {
+            foreach (GameObject go in doorPrefab)
+            {
+                go.GetComponent<Door>().doorReset();
+                do
+                {
+                    randomIndex = UnityEngine.Random.Range(0, behindDoorScene.Count);
+
+                } while (behindDoorScene[randomIndex] == "");
+                go.GetComponent<Door>().behindTheDoor = behindDoorScene[randomIndex];
+                if (behindDoorScene[randomIndex] == "prize")
+                {
+                    behindDoorScene[randomIndex] = "";
+                    prizeGenerated = true;
+                }
+            }
+        }
+    }
     // This is the dialogue  that opens that prompts they if they want to maintain their choice 
     public void OpenDialog()
     {
@@ -81,48 +112,59 @@ public class DoorsManager : MonoBehaviour
         
         if(!playerUsedSnif && !playerUsedNightVision)
         {
-            dealer.clip = wolfBark;
-            dealer.Play();
-            List<GameObject> tempDoors = new List<GameObject>();
-
-            foreach (GameObject door in doorPrefab)
+            if(clicks==0)
             {
-                if (door.GetComponent<Door>().doorId != chosenDoor && door.GetComponent<Door>().behindTheDoor != "prize")
+                dealer.clip = wolfBark;
+                dealer.Play();
+                List<GameObject> tempDoors = new List<GameObject>();
+
+                foreach (GameObject door in doorPrefab)
                 {
-                    tempDoors.Add(door);
+                    if (door.GetComponent<Door>().doorId != chosenDoor && door.GetComponent<Door>().behindTheDoor != "prize")
+                    {
+                        tempDoors.Add(door);
+                    }
+
                 }
 
-            }
+                int i = UnityEngine.Random.Range(0, tempDoors.Count);
 
-            int i = UnityEngine.Random.Range(0, tempDoors.Count);
+
+                /*
+                doorPrefab[doorId].GetComponent<SpriteRenderer>().enabled = false;
+                doorPrefab[doorId].transform.Find("Selected").gameObject.SetActive(true);
+                doorPrefab[doorId].transform.Find("Selected").GetComponent<SpriteRenderer>().enabled = true;
+                */
+                //Enable the revealed door 
+
+                if (tempDoors[i].GetComponent<Door>().behindTheDoor == "enemy")
+                {
+                    tempDoors[i].GetComponent<Animator>().SetBool("DoorReveal", true);
+                }
+                else if (tempDoors[i].GetComponent<Door>().behindTheDoor == "traps")
+                {
+                    tempDoors[i].GetComponent<Animator>().SetBool("DoorReveal", true);
+                }
+
+
+                tempDoors[i].GetComponent<Door>().revealed = true;
+
+                dialogPanel.GetComponent<DialogManager>().NextDialog();
+                clicks++;
+            }
+            else if (clicks==1)
+            {
+                doorPrefab[chosenDoor].GetComponent<Door>().OpenDoor();
+            }
             
-           
-            /*
-            doorPrefab[doorId].GetComponent<SpriteRenderer>().enabled = false;
-            doorPrefab[doorId].transform.Find("Selected").gameObject.SetActive(true);
-            doorPrefab[doorId].transform.Find("Selected").GetComponent<SpriteRenderer>().enabled = true;
-            */
-            //Enable the revealed door 
-           
-            if (tempDoors[i].GetComponent<Door>().behindTheDoor == "enemy")
-            {
-                tempDoors[i].GetComponent<Animator>().SetBool("DoorReveal", true);
-            }
-            else if(tempDoors[i].GetComponent<Door>().behindTheDoor == "traps")
-            {
-                tempDoors[i].GetComponent<Animator>().SetBool("DoorReveal", true);
-            }
-
-
-                    tempDoors[i].GetComponent<Door>().revealed = true;
-
-            dialogPanel.GetComponent<DialogManager>().NextDialog();
-            clicks++;
         }
         else if(playerUsedSnif)
         {
+            Debug.Log("Sniff");
             if(player.GetComponent<Player>().sniifferCharges>0)
             {
+                Debug.Log("Sniff");
+                player.GetComponent<Player>().removeSniff();
                 StartCoroutine(DogSniffReveal(chosenDoor));
             }
             
@@ -131,6 +173,7 @@ public class DoorsManager : MonoBehaviour
         {
             if(player.GetComponent<Player>().nightVisionCharges>0)
             {
+                player.GetComponent<Player>().removeNight();
                 doorPrefab[chosenDoor].GetComponent<Animator>().SetBool("DoorTrap", true);
             }
             
@@ -142,7 +185,7 @@ public class DoorsManager : MonoBehaviour
     IEnumerator DogSniffReveal(int doorId)
     {
         int i = UnityEngine.Random.Range(0, dogSniffs.Length);
-
+        Debug.Log("Play Sounds");
 
         audioSource.clip = dogSniffs[i];
         audioSource.Play();
