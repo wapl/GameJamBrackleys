@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     public GameObject WeaponIconUi;
     public Sprite[] weapons;
     public DoorsManager doorsManager;
+    public GameObject GameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -98,6 +99,7 @@ public class Player : MonoBehaviour
         if (health <= 0)
         {
             EndScreen.SetActive(true);
+            GameManager.GetComponent<GameManager>().Gameover = true;
         }
     }
 

@@ -31,6 +31,8 @@ public class Door : MonoBehaviour
     private Boolean selected;
     private string reward;
     public  string enemy;
+
+    public GameObject GameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -91,16 +93,12 @@ public class Door : MonoBehaviour
     private void OnMouseDown()
     {
         //Debug.Log("clicked"+DoorType);
-         
+         if(!GameManager.GetComponent<GameManager>().Gameover)
+        {
             GetComponentInParent<DoorsManager>().Reveal(doorId);
+        }
+           
                 //GetComponentInParent<DoorsManager>().OpenDialog();
-            
-            
-        
-        
-
-        
-        
     }
     public void playOpenSound()
     {

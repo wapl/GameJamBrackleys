@@ -25,7 +25,7 @@ public class DoorsManager : MonoBehaviour
     public Boolean playerUsedNightVision = false;
     int randomIndex;
     public int clicks;
-
+    public GameObject GameManager;
     [SerializeField] GameObject dialogPanel;
 
    
@@ -174,7 +174,12 @@ public class DoorsManager : MonoBehaviour
             if(player.GetComponent<Player>().nightVisionCharges>0)
             {
                 player.GetComponent<Player>().removeNight();
-                doorPrefab[chosenDoor].GetComponent<Animator>().SetBool("DoorTrap", true);
+                if(doorPrefab[chosenDoor].GetComponent<Door>().behindTheDoor=="traps")
+                {
+                    doorPrefab[chosenDoor].GetComponent<Animator>().SetBool("DoorTrap", true);
+                }
+               
+                playerUsedNightVision = false;
             }
             
         }

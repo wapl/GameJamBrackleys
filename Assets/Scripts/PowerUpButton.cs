@@ -7,6 +7,7 @@ public class PowerUpButton : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip highlighted;
     public AudioClip clicked;
+    public GameObject GameManager;
     // Start is called before the first frame update
     void Start()
     {

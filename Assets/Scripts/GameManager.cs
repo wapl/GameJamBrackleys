@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public AudioSource audioSource ;
     public AudioClip gameMusic;
+    public Boolean Gameover = false; 
     [SerializeField] GameObject powerUps;
     // Start is called before the first frame update
     void Start()

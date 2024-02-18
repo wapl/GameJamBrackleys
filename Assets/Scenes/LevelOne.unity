@@ -613,6 +613,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1892770657}
     - target: {fileID: 8651454943990120725, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
+      propertyPath: GameManager
+      value: 
+      objectReference: {fileID: 1162437137}
+    - target: {fileID: 8651454943990120725, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 207530520}
@@ -762,7 +766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8651454943990120727, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8651454943990120727, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: m_LocalScale.x
@@ -1149,6 +1153,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1892770657}
     - target: {fileID: 8651454943990120725, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
+      propertyPath: GameManager
+      value: 
+      objectReference: {fileID: 1162437137}
+    - target: {fileID: 8651454943990120725, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 207530520}
@@ -1298,7 +1306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8651454943990120727, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8651454943990120727, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: m_LocalScale.x
@@ -2234,6 +2242,7 @@ MonoBehaviour:
   allowClick: 1
   playerUsedNightVision: 0
   clicks: 0
+  GameManager: {fileID: 1162437137}
   dialogPanel: {fileID: 363721814}
 --- !u!1 &624247274
 GameObject:
@@ -3100,6 +3109,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1892770657}
     - target: {fileID: 8651454943990120725, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
+      propertyPath: GameManager
+      value: 
+      objectReference: {fileID: 1162437137}
+    - target: {fileID: 8651454943990120725, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 207530520}
@@ -3249,7 +3262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8651454943990120727, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8651454943990120727, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: m_LocalScale.x
@@ -3404,6 +3417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 582117184}
   gameMusic: {fileID: 8300000, guid: 1d5b7d0af0f8c744da7cc370e8108177, type: 3}
+  Gameover: 0
   powerUps: {fileID: 1857650008}
 --- !u!4 &1162437139
 Transform:
@@ -3887,6 +3901,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: aff0ef19939e2f34d8671e8536e92b9b, type: 3}
   - {fileID: 21300000, guid: 220d1485cb53fd5408b7688c4d008d10, type: 3}
   doorsManager: {fileID: 620674496}
+  GameManager: {fileID: 1162437137}
 --- !u!1001 &1383881661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4034,6 +4049,10 @@ PrefabInstance:
       propertyPath: AttackSoure
       value: 
       objectReference: {fileID: 1892770657}
+    - target: {fileID: 8651454943990120725, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
+      propertyPath: GameManager
+      value: 
+      objectReference: {fileID: 1162437137}
     - target: {fileID: 8651454943990120725, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: audioSource
       value: 
@@ -4184,7 +4203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8651454943990120727, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8651454943990120727, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: m_LocalScale.x
@@ -4576,6 +4595,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1892770657}
     - target: {fileID: 8651454943990120725, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
+      propertyPath: GameManager
+      value: 
+      objectReference: {fileID: 1162437137}
+    - target: {fileID: 8651454943990120725, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 207530520}
@@ -4729,7 +4752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8651454943990120727, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8651454943990120727, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: m_LocalScale.x
@@ -6472,6 +6495,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1892770657}
     - target: {fileID: 8651454943990120725, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
+      propertyPath: GameManager
+      value: 
+      objectReference: {fileID: 1162437137}
+    - target: {fileID: 8651454943990120725, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 207530520}
@@ -6621,7 +6648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8651454943990120727, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8651454943990120727, guid: 499bf6505d7d03b4f80c716a9cf92da7, type: 3}
       propertyPath: m_LocalScale.x
